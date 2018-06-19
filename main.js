@@ -1,5 +1,45 @@
-const canvas = require('canvas-wrapper');
-const asyncLib = require('async');
+const canvas = require('canvas-api-wrapper');
+canvas.oncall = e => console.log(e.method, e.url, e.body);
+
+async function main(courseId) {
+    const course = canvas.getCourse(courseId);
+    await course.modules.get();
+    var titles = course.modules.map(module => {
+        return module.name;
+    });
+    if (!titles.includes('Instructor Resources (DO NOT PUBLISH)')) {
+        titles = titles.map(title => {
+            return title.toLowerCase();
+        });
+        // TODO: Check to see if an instructor resources module exists, but is named differently than the Canvas standard
+        if (titles.includes('instructor resources')) {
+            var i = course.modules.findIndex(module => {
+                return module.name.toLowerCase() === 'instructor resources';
+            })
+            course.modules[i].setTitle('Instructor Resources (DO NOT PUBLISH)');
+            course.modules[i].published = false;
+            await course.modules.update();
+        } else {
+            var studentModule = await course.modules.create({
+                name: "Instructor Resources (DO NOT PUBLISH)",
+                position: 2
+            });
+        }
+
+        // TODO: Add the necessary modules
+    }
+    titles = titles.map(title => {
+        return title.toLowerCase();
+    });
+    if (!titles.includes('student resources')) {
+        var studentModule = await course.modules.create({
+            name: "Student Resources"
+        });
+
+        studentModule.published = true;
+        await studentModule.update();
+    }
+}
 
 module.exports = (course, stepCallback) => {
 
@@ -7,32 +47,10 @@ module.exports = (course, stepCallback) => {
      * START HERE
      ************************************/
 
-    // TODO: Get the modules from the Brightspace course
-
-    // Get the modules from the Canvas course
-    canvas.get(`/api/v1/courses/${course.info.canvasOU}/modules`, (err, modules) => {
-        if (err) {
+    main(course.info.canvasOU)
+        .then(() => stepCallback)
+        .catch(err => {
             console.log(err);
-            stepCallback(null, course);
-            return;
-        }
-        var titles = modules.map(module => {
-            return module.name;
-        });
-        if (titles.includes('Instructor Resources (DO NOT PUBLISH)') && titles.includes('Instructor Resources (DO NOT PUBLISH)')) {
-            course.log({
-                'Course Code': 'Placeholder',
-                'Old Instructor Resources': 'Kept',
-                'Old Student Resources': 'Kept'
-            });
-        } else {
-            titles = titles.map(title => {
-                return title.toLowerCase();
-            });
-            console.log(titles);
-            // TODO: Check to see if an instructor/student resources module exists
-            // TODO: Add the necessary modules
-        }
-    });
-
+            stepCallback();
+        })
 };
