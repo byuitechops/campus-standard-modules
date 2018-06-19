@@ -1,0 +1,30 @@
+{
+  "name": "campus-standard-modules",
+  "version": "1.0.0",
+  "description": "Add instructor resources and student resources if they aren't already in the course.",
+  "main": "main.js",
+  "dependencies": {
+    "canvas-api-wrapper": "^3.2.0",
+    "canvas-wrapper": "github:byuitechops/canvas-wrapper"
+  },
+  "devDependencies": {
+    "async": "^2.6.0",
+    "child-development-kit": "github:byuitechops/child-development-kit",
+    "tap": "^10.7.3"
+  },
+  "scripts": {
+    "start": "node ./node_modules/child-development-kit/runChild.js",
+    "test": "tap ./node_modules/child-development-kit/runChild.js -T"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/byuitechops/campus-standard-modules.git"
+  },
+  "author": "Cal Wilson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/byuitechops/campus-standard-modules/issues"
+  },
+  "homepage": "https://github.com/byuitechops/campus-standard-modules#readme",
+  "childType": "postImport"
+}
