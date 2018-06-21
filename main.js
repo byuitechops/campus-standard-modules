@@ -1,5 +1,4 @@
 const canvas = require('canvas-api-wrapper');
-canvas.oncall = e => console.log(e.method, e.url, e.body);
 
 async function main(courseId) {
     const course = canvas.getCourse(courseId);
@@ -37,6 +36,7 @@ async function main(courseId) {
         studentModule.published = true;
         await studentModule.update();
     }
+    return 1;
 }
 
 module.exports = (course, stepCallback) => {
