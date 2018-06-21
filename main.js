@@ -25,8 +25,6 @@ async function main(courseId) {
                 position: 2
             });
         }
-
-        // TODO: Add the necessary modules
     }
     titles = titles.map(title => {
         return title.toLowerCase();
