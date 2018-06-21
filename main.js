@@ -46,9 +46,9 @@ module.exports = (course, stepCallback) => {
      ************************************/
 
     main(course.info.canvasOU)
-        .then(() => stepCallback)
+        .then(() => stepCallback(null, course))
         .catch(err => {
             console.log(err);
-            stepCallback();
+            stepCallback(err, course);
         })
 };
