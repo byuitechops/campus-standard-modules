@@ -8,7 +8,7 @@ This child module is built to be used by the Brigham Young University - Idaho D2
 
 ## Purpose
 
-The purpose of the campus-standard-modules child module is ensure that all Canvas campus courses have the campus course template's modules.
+The purpose of the campus-standard-modules child module is to ensure that all Canvas campus courses have the campus course template's modules.
 
 ## How to Install
 
@@ -18,7 +18,7 @@ npm install campus-standard-modules
 
 ## Run Requirements
 
-This child module should be ran before all other Canvas-module-creating related modules.
+This child module should be ran before all other Canvas-module-creating/updating related modules.
 
 ## Process
 
@@ -33,7 +33,7 @@ Describe in steps how the module accomplishes its goals.
 7. Determine if the array contains the title "Student Resources".
 8. If it does skip to step 9. If it doesn't, create the "Student Resources" module.
 9. Publish the "Student Resources" module.
-10. Move onto the next child module.
+10. Move to the next child module.
 
 
 ## Log Categories
