@@ -22,8 +22,6 @@ This child module should be ran before all other Canvas-module-creating/updating
 
 ## Process
 
-Describe in steps how the module accomplishes its goals.
-
 1. Call the main function passing the course object and the canvasOU as parameters.
 2. Get the modules from the correct course.
 3. Extract the title of each module into a new array.
