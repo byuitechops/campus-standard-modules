@@ -10,7 +10,6 @@ async function main(courseObj, courseId) {
         titles = titles.map(title => {
             return title.toLowerCase();
         });
-        // TODO: Check to see if an instructor resources module exists, but is named differently than the Canvas standard
         if (titles.includes('instructor resources')) {
             var i = course.modules.findIndex(module => {
                 return module.name.toLowerCase() === 'instructor resources';
